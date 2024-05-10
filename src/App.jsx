@@ -1,14 +1,13 @@
-import SectionProducts from "./pages/sectionProducts"
-import Top from "./pages/top"
-
+import HeaderTop from "./components/headerTop";
+import SectionProducts from "./components/sectionProducts";
+import Home from "./pages/home";
 
 function App() {
   return (
     <>
-    <Top/>
-    <SectionProducts/>
+      <Home />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { FaCartPlus } from "react-icons/fa";
+import CardButton from "./header/cardbutton";
 
 
 export default function HeaderTop(){
@@ -9,9 +9,7 @@ export default function HeaderTop(){
           <h1>
             MKS <span>Sistemas</span>
           </h1>
-          <CartButtom>
-            <FaCartPlus /> <p>0</p>
-          </CartButtom>
+         <CardButton/>
         </Header>
       </>
     )
@@ -32,7 +30,7 @@ const Header = styled.div`
   color: white;
 
   h1 {
-    font-size: 30px;
+    font-size: 40px;
     margin-left: 50px;
     font-weight: bold;
   }
@@ -43,19 +41,3 @@ const Header = styled.div`
   }
 `;
 
-const CartButtom = styled.button`
-  width: 90px;
-  height: 45px;
-  border: none;
-  margin-right: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
-
-  p {
-    width: 20px;
-    font-size: 10px;
-    font-weight: bolder;
-  }
-`;
