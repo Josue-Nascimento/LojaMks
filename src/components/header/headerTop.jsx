@@ -1,15 +1,15 @@
 import styled from "styled-components";
-import CardButton from "./header/cardbutton";
+import CardButton from "../header/cardButton";
 
 
-export default function HeaderTop(){
+export default function HeaderTop({productsSelected}){
     return(
         <>
         <Header>
           <h1>
             MKS <span>Sistemas</span>
           </h1>
-         <CardButton/>
+         <CardButton productsSelected={productsSelected}/>
         </Header>
       </>
     )

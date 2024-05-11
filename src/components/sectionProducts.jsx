@@ -2,29 +2,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { BsBagPlusFill } from "react-icons/bs";
+import Skeleton from 'react-loading-skeleton'
 
-
-export default function SectionProducts() {
-    //I made a state to get the information from the API and made a map to render
+export default function SectionProducts({ setProductsSelected, productsSelected }) {
+  //I made a state to get the information from the API and made a map to render
   const [productsList, setProductsList] = useState([]);
-  
-  function SendtoCart(photo, price, name){
-    const body = {
-        photo: photo,
-        price: price,
-        name: name
-    };
-    console.log("Enviando dados:", body);
-     const promisse = axios.post("https://mks-frontend-challenge-04811e8151e6.herokuapp.com/api/v1/products?page=1&rows=8&sortBy=id&orderBy=DESC",body)
-     console.log(body)
-      promisse.then((res) =>{
-        console.log("Resposta do servidor:", res.data);
-      })
-      promisse.catch((error) => {
-        console.error("Erro ao enviar dados:", error.response.data);
-        // Lide com o erro aqui
-    });
-  }
 
   useEffect(() => {
     const promisse = axios.get(
@@ -36,28 +18,43 @@ export default function SectionProducts() {
     });
     promisse.catch((err) => {
       console.log(err.response);
-     
     });
   }, []);
 
+  const sendToCart = (photo, price, name) => {
+    const newProduct = {
+      photo: photo,
+      price: price,
+      name: name,
+    };
+    const exists = productsSelected.some(product => product.name === name);
+    if (!exists) {
+      console.log("Enviando dados:", newProduct);
+      setProductsSelected((prevProducts) => [...prevProducts, newProduct]);
+    } else {
+      console.log("Este produto já foi adicionado ao carrinho.");
+    }
+  };
+
   return (
     <Container>
+      
       {productsList.map((item) => (
         <ContainerProducts key={item.id}>
-          <img src={item.photo} />
+          <img src={item.photo || <Skeleton/>} />
           <Price>
-          <h2>
-            {item.name}
-          </h2>
-          <span>R$ {item.price}</span>
+            <h2>{item.name || <Skeleton count={2}/>}</h2>
+            <span>R$ {item.price || <Skeleton count={2}/>}</span>
           </Price>
-          <p>{item.description}</p>
-          <button onClick={()=> SendtoCart(item.photo, item.price, item.name)}>
-            <BsBagPlusFill />
+          <p>{item.description || <Skeleton />}</p>
+
+          <button onClick={() => sendToCart(item.photo, item.price, item.name)}>
+            <BsBagPlusFillIcon />
             Comprar
           </button>
         </ContainerProducts>
       ))}
+      
     </Container>
   );
 }
@@ -86,7 +83,7 @@ const ContainerProducts = styled.div`
     height: 138px;
     margin-bottom: 10px;
   }
-  
+
   p {
     font-family: Montserrat;
     font-size: 10px;
@@ -112,11 +109,18 @@ const ContainerProducts = styled.div`
   }
 `;
 
+const BsBagPlusFillIcon = styled(BsBagPlusFill)`
+margin-right: 5px;
+display: flex;
+align-items: center;
+margin-bottom: 3px;
+`
+
 const Price = styled.div`
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    h2 {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  h2 {
     font-family: Montserrat;
     width: 124px;
     height: 38px;
@@ -129,8 +133,6 @@ const Price = styled.div`
     justify-content: space-around;
     font-size: 16px;
     margin-bottom: 20px;
-
-
   }
   span {
     background-color: #373737;
@@ -145,4 +147,4 @@ const Price = styled.div`
     font-weight: 700;
     border-radius: 5px;
   }
-`
+`;
