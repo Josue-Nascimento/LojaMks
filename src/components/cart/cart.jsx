@@ -1,13 +1,19 @@
 import styled from "styled-components";
 import { IoMdCloseCircle } from "react-icons/io";
+import ListCart from "../cart/listCart";
 
-export default function Cart({ productsSelected, setCardValue }) {
+export default function Cart({
+  productsSelected,
+  setCardValue,
+  setProductsSelected,
+
+}) {
   const calculateTotalPrice = () => {
-  //function to calculate the total price
+    //function to calculate the total price
     const totalPrice = productsSelected.reduce((total, product) => {
       // Converts the string to a number
       const price = parseFloat(product.price);
-    
+
       if (!isNaN(price)) {
         // If it's a number, add it to the total
         return total + price;
@@ -18,33 +24,23 @@ export default function Cart({ productsSelected, setCardValue }) {
     }, 0);
     return totalPrice.toFixed(2);
   };
+
+  const handleClose = () => {
+    setCardValue(false); // Fecha a aba
+  };
+
   return (
     <CartContainer>
       <CartTop>
         <h1>Carrinho de compras</h1>
-        <CloseIcon onClick={() => setCardValue(false)} />
+        <CloseIcon onClick={()=>handleClose()} />
       </CartTop>
-      <ProductList>
-        {productsSelected.map((product, index) => (
-          <ProductItem key={product.id}>
-            <ProductImage src={product.photo} />
-
-            <ProductName>{product.name}</ProductName>
-            <QuantityControls>
-              <QuantityButton>-</QuantityButton>
-              <Quantity>1</Quantity>
-              <QuantityButton>+</QuantityButton>
-            </QuantityControls>
-
-            <ProductPrice>R${product.price}</ProductPrice>
-          </ProductItem>
-        ))}
-      </ProductList>
-      <TotalPrice>
-        <p>Total: </p>
-        <p>R${calculateTotalPrice()}</p>
-      </TotalPrice>
+      <ListCart
+        productsSelected={productsSelected}
+        setProductsSelected={setProductsSelected}
+      />
       <OrderFinalized>
+       
         <h1>Finalizar Compra</h1>
       </OrderFinalized>
     </CartContainer>
@@ -54,6 +50,7 @@ export default function Cart({ productsSelected, setCardValue }) {
 const CartContainer = styled.div`
   width: 481px;
   height: 100vh;
+  position: relative;
   background-color: #0f52ba;
   position: fixed;
   right: 0;
@@ -62,7 +59,6 @@ const CartContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
- 
 `;
 
 const CartTop = styled.div`
@@ -71,6 +67,7 @@ const CartTop = styled.div`
   justify-content: space-around;
   align-items: center;
   h1 {
+    width: 272px;
     font-size: 27px;
     color: #f8f8f8;
     margin-right: 1px;
@@ -84,89 +81,27 @@ const CloseIcon = styled(IoMdCloseCircle)`
   cursor: pointer;
 `;
 
-const ProductList = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-  overflow-y: hidden;
-  padding-bottom: 70px;
-`;
 
-const ProductItem = styled.div`
-  background-color: #f8f8f8;
-  border-radius: 10px;
-  width: 400px;
-  height: 95px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin-top: 20px;
-  
-`;
-
-const ProductImage = styled.img`
-  width: 46px;
-  height: 57px;
-`;
-
-const ProductName = styled.h2`
-  width: 100px;
-  font-size: 13px;
-  font-weight: 400;
-  font-family: Montserrat;
-`;
-
-const QuantityControls = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const QuantityButton = styled.button`
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-
-  color: #0f52ba;
-`;
-
-const Quantity = styled.span`
-  margin: 0 5px;
-`;
-
-const ProductPrice = styled.p`
-  font-family: Montserrat;
-  margin-right: 25px;
-`;
-
-const TotalPrice = styled.div`
-background-color: red;
-  width: 300px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  p {
-    font-size: 28px;
-    font-weight: 700;
-    color: white;
-  }
-`;
 
 const OrderFinalized = styled.div`
-  background-color: black;
-  width: 520px;
-  height: 67px;
+  width: 100%;
   color: white;
-  position: fixed;
+  position: absolute; /* Altera para position: absolute */
   bottom: 0;
+  margin-bottom: 40px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  margin-top: 10px;
+  flex-direction: column;
+
   h1 {
+    background-color: black;
+    width: 100%;
+    height: 67px;
     font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 50px;
   }
 `;

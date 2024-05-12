@@ -9,7 +9,7 @@ export default function Home() {
   
   return (
     <Container>
-      <HeaderTop productsSelected={productsSelected} />
+      <HeaderTop productsSelected={productsSelected} setProductsSelected={setProductsSelected} />
       <SectionProducts productsSelected={productsSelected} setProductsSelected={setProductsSelected}/>
       <Footer><p>MKS sistemas © Todos os direitos reservados</p></Footer>
     </Container>

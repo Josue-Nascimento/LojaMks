@@ -3,7 +3,7 @@ import { FaCartPlus } from "react-icons/fa";
 import { useState } from "react";
 import Cart from "../cart/cart";
 
-export default function CardButton({ productsSelected }) {
+export default function CardButton({ productsSelected, setProductsSelected }) {
   const [cardValue, setCardValue] = useState(false);
   console.log(cardValue);
 
@@ -11,7 +11,7 @@ export default function CardButton({ productsSelected }) {
   return (
     <CartButtom onClick={()=>setCardValue(true)}>
       {cardValue ? (
-        <Cart productsSelected={productsSelected} setCardValue={setCardValue} />
+        <Cart  setProductsSelected={setProductsSelected} productsSelected={productsSelected} setCardValue={setCardValue} />
       ) : (
         ""
       )}
