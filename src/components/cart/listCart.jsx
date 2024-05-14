@@ -2,24 +2,17 @@ import styled from "styled-components";
 import { IoMdCloseCircle } from "react-icons/io";
 import { useEffect, useState } from "react";
 
-
 export default function ListCart({ productsSelected, setProductsSelected }) {
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
-    // Calcula o totalPrice sempre que productsSelected mudar
-    calculateTotalPrice();
-  }, [productsSelected]);
+    // Chame a função calculateTotalPrice para atualizar o totalPrice
+    setTotalPrice(calculateTotalPrice());
+  }, [productsSelected]); // Adicione productsSelected como dependência
 
   const removeProduct = (index) => {
     setProductsSelected((prevProducts) => {
-      // Remova o produto do array de produtos selecionados
       const updatedProducts = prevProducts.filter((product, i) => i !== index);
-
-      // Atualiza o totalPrice após a remoção do produto
-      const newTotalPrice = calculateTotalPrice(updatedProducts);
-      setTotalPrice(newTotalPrice);
-
       return updatedProducts;
     });
   };
@@ -31,7 +24,7 @@ export default function ListCart({ productsSelected, setProductsSelected }) {
           const newQuantity = product.quantity + increment;
           return {
             ...product,
-            quantity: newQuantity >= 1 ? newQuantity : 1 // Garante que a quantidade nunca seja menor que 1
+            quantity: newQuantity >= 1 ? newQuantity : 1, // Garante que a quantidade nunca seja menor que 1
           };
         }
         return product;
@@ -46,7 +39,7 @@ export default function ListCart({ productsSelected, setProductsSelected }) {
   const calculateTotalPrice = (products = productsSelected) => {
     // Calcula o totalPrice como a soma dos preços totais de todos os produtos na lista
     return products.reduce((total, product) => {
-      return total + (product.price * product.quantity);
+      return total + product.price * product.quantity;
     }, 0);
   };
 
@@ -71,7 +64,13 @@ export default function ListCart({ productsSelected, setProductsSelected }) {
           </ProductItem>
         ))}
       </ProductList>
-      <TotalPrice><p>Total: </p><p>R${totalPrice}</p></TotalPrice>
+      <TotalPrice>
+        <p>Total: </p>
+        <p>R${totalPrice}</p>
+      </TotalPrice>
+      <OrderFinalized>
+        <h1>Finalizar Compra</h1>
+      </OrderFinalized>
     </>
   );
 }
@@ -80,9 +79,8 @@ const ProductList = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
-  overflow-y: hidden;
   padding-bottom: 70px;
+  overflow-y: auto;
 `;
 
 const ProductItem = styled.div`
@@ -122,12 +120,11 @@ const QuantityButton = styled.button`
   align-items: center;
   justify-content: center;
   font-size: 16px;
-
   color: #0f52ba;
 `;
 
 const Quantity = styled.span`
-font-size: 10px;
+  font-size: 10px;
   margin: 0 5px;
 `;
 
@@ -145,20 +142,41 @@ const CloseIconProductList = styled(IoMdCloseCircle)`
   cursor: pointer;
   color: #000; /* Altere a cor conforme necessário */
 `;
+
 const TotalPrice = styled.div`
-     width: 300px;
+  width: 108%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  margin-right: 80px;
 
   p {
-  background-color: #0f52ba;
-height: 40px;
+    width: 100%;
+    margin-bottom: 90px;
     font-size: 28px;
+    line-height: 15px;
     font-weight: 700;
     color: white;
-    position: relative;
+    padding: 5px 10px;
   }
-    
+`;
+
+const OrderFinalized = styled.div`
+  width: 100%;
+  color: white;
+  position: absolute; /* Altera para position: absolute */
+  right: 25px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  bottom: 39px;
+
+  h1 {
+    background-color: black;
+    width: 100%;
+    height: 67px;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 `;

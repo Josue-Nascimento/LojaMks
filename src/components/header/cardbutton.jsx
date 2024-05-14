@@ -5,23 +5,30 @@ import Cart from "../cart/cart";
 
 export default function CardButton({ productsSelected, setProductsSelected }) {
   const [cardValue, setCardValue] = useState(false);
-  console.log(cardValue);
 
+  // Function to toggle the visibility of the cart
+  const handleToggleCart = () => {
+    setCardValue(!cardValue); // Toggles between opening and closing the cart
+  };
   
   return (
-    <CartButtom onClick={()=>setCardValue(true)}>
-      {cardValue ? (
-        <Cart  setProductsSelected={setProductsSelected} productsSelected={productsSelected} setCardValue={setCardValue} />
-      ) : (
-        ""
-      )}
-      <FaCartPlus />
-      <p>{productsSelected.length}</p>
-    </CartButtom>
+    <div onClick={handleToggleCart}>
+      <CartButtonWrapper>
+         {cardValue && (
+          <Cart
+            productsSelected={productsSelected}
+            setProductsSelected={setProductsSelected}
+            setCardValue={setCardValue} 
+          />
+        )}
+        <FaCartPlus />
+        <p>{productsSelected.length}</p>
+      </CartButtonWrapper>
+    </div>
   );
 }
 
-const CartButtom = styled.button`
+const CartButtonWrapper = styled.button`
   width: 90px;
   height: 45px;
   border: none;
@@ -38,10 +45,3 @@ const CartButtom = styled.button`
   }
 `;
 
-const Insidethecart = styled.div`
-  background-color: #717882;
-  width: 488px;
-  height: 200%;
-  position: fixed;
-  right: 0px;
-`;

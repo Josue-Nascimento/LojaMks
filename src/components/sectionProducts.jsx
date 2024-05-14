@@ -2,14 +2,20 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { BsBagPlusFill } from "react-icons/bs";
-import Skeleton from 'react-loading-skeleton';
+import Skeleton from "react-loading-skeleton";
 
-export default function SectionProducts({ setProductsSelected, productsSelected }) {
+// This component renders the products section.
+// When loading, it displays skeleton placeholders for product items.
+// Once data is loaded, it renders the product items fetched from the API.
+export default function SectionProducts({
+  setProductsSelected,
+  productsSelected,
+}) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [productsList, setProductsList] = useState([]);
 
-
+  // Fetches the product data from the API on component mount.
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -27,13 +33,14 @@ export default function SectionProducts({ setProductsSelected, productsSelected 
     fetchData();
   }, []);
 
+  // Function to add a product to the cart.
   const sendToCart = (photo, price, name) => {
     const newProduct = {
       photo: photo,
       price: price,
       name: name,
     };
-    const exists = productsSelected.some(product => product.name === name);
+    const exists = productsSelected.some((product) => product.name === name);
     if (!exists) {
       console.log("Enviando dados:", newProduct);
       setProductsSelected((prevProducts) => [...prevProducts, newProduct]);
@@ -49,10 +56,14 @@ export default function SectionProducts({ setProductsSelected, productsSelected 
           <ContainerProducts key={index}>
             <Skeleton height={138} />
             <Price>
-              <h2><Skeleton height={38} /></h2>
-              <span><Skeleton width={64} /></span>
+              <h2>
+                <Skeleton height={38} />
+              </h2>
+              <span>
+                <Skeleton width={64} />
+              </span>
             </Price>
-            <Skeleton count={2} />
+            <Skeleton count={2} width={30} />
             <button disabled>
               <BsBagPlusFillIcon />
               Comprar
@@ -66,16 +77,20 @@ export default function SectionProducts({ setProductsSelected, productsSelected 
           <ContainerProducts key={item.id}>
             <img src={item.photo} alt={item.name} />
             <Price>
-              <h2>{item.name} <span>R$ {item.price}</span></h2>
-              
-            <p>{item.description}</p>
+              <h2>
+                {item.name}
+                <span>R${item.price}</span>
+              </h2>
+
+              <p>{item.description}</p>
             </Price>
-            <button onClick={() => sendToCart(item.photo, item.price, item.name)}>
+            <button
+              onClick={() => sendToCart(item.photo, item.price, item.name)}
+            >
               <BsBagPlusFillIcon />
               Comprar
             </button>
           </ContainerProducts>
-          
         ))
       )}
     </Container>
@@ -117,8 +132,8 @@ const ContainerProducts = styled.div`
     font-size: 10px;
     width: 192px;
     height: 25px;
-    
-     /* Adicionado para centralizar o texto */
+
+    /* Adicionado para centralizar o texto */
   }
 
   button {
@@ -145,15 +160,15 @@ const BsBagPlusFillIcon = styled(BsBagPlusFill)`
 const Price = styled.div`
   display: flex;
 
-  
   flex-direction: column;
- 
+
   h2 {
     font-family: Montserrat;
     font-size: 16px;
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
   }
 
   span {
@@ -168,6 +183,7 @@ const Price = styled.div`
     font-family: Montserrat;
     font-weight: 700;
     border-radius: 5px;
+    margin-left: 5px;
   }
 `;
 
