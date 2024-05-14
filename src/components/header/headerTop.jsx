@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import CardButton from "../header/cardButton";
+import CardButton from "./cardButton";
 
 export default function HeaderTop({ productsSelected, setProductsSelected }) {
   return (

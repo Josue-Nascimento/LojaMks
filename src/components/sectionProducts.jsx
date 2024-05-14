@@ -39,6 +39,7 @@ export default function SectionProducts({
       photo: photo,
       price: price,
       name: name,
+      quantity: 1
     };
     const exists = productsSelected.some((product) => product.name === name);
     if (!exists) {

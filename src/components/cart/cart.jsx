@@ -16,7 +16,7 @@ export default function Cart({
   const handleClickInside = (e) => {
     e.stopPropagation(); //// Prevents clicks inside the cart from affecting elements outside
   };
-
+  
   return (
     <CartContainer onClick={handleClickInside}>
       <CartTop>
@@ -37,7 +37,7 @@ const CartContainer = styled.div`
   height: 100vh;
   position: relative;
   background-color: #0f52ba;
-  
+
   position: fixed;
   right: 0;
   top: 0;
@@ -52,7 +52,7 @@ const CartTop = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  h1 {
+  h1 { 
     font-size: 30px;
     color: #f8f8f8;
     margin-right: 1px;

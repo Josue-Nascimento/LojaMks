@@ -3,62 +3,92 @@ import { IoMdCloseCircle } from "react-icons/io";
 import { useEffect, useState } from "react";
 
 export default function ListCart({ productsSelected, setProductsSelected }) {
+  // State to store the total price
   const [totalPrice, setTotalPrice] = useState(0);
 
+  // Effect to update the total price when the selected products change
   useEffect(() => {
-    // Chame a função calculateTotalPrice para atualizar o totalPrice
     setTotalPrice(calculateTotalPrice());
-  }, [productsSelected]); // Adicione productsSelected como dependência
+  }, [productsSelected]);
 
+  // Function to remove a product from the cart
   const removeProduct = (index) => {
-    setProductsSelected((prevProducts) => {
-      const updatedProducts = prevProducts.filter((product, i) => i !== index);
-      return updatedProducts;
-    });
+    // Display a confirmation message to the user
+    const confirmation = window.confirm(
+      "Are you sure you want to remove this item?"
+    );
+
+    // Check if the user confirmed the removal
+    if (confirmation) {
+      setProductsSelected((prevProducts) => {
+        const updatedProducts = prevProducts.filter(
+          (product, i) => i !== index
+        );
+        return updatedProducts;
+      });
+    }
   };
 
+  // Function to update the quantity of a product in the cart
   const updateQuantity = (index, increment) => {
     setProductsSelected((prevProducts) => {
-      const updatedProducts = prevProducts.map((product, i) => {
-        if (i === index) {
-          const newQuantity = product.quantity + increment;
-          return {
-            ...product,
-            quantity: newQuantity >= 1 ? newQuantity : 1, // Garante que a quantidade nunca seja menor que 1
-          };
-        }
-        return product;
-      });
-
-      setTotalPrice(calculateTotalPrice(updatedProducts)); // Atualiza o totalPrice
-
+      const updatedProducts = prevProducts
+        .map((product, i) => {
+          if (i === index) {
+            const newQuantity = product.quantity + increment;
+            // Check if the new quantity will be greater than 0
+            if (newQuantity > 0) {
+              return {
+                ...product,
+                quantity: newQuantity,
+              };
+            } else {
+              // Display a confirmation message before removing the item
+              const confirmation = window.confirm(
+                "Are you sure you want to remove this item?"
+              );
+              if (confirmation) {
+                return null;
+              } else {
+                return product; // Keep the product in the list
+              }
+            }
+          }
+          return product;
+        })
+        .filter(Boolean); // Remove null items from the list
+      setTotalPrice(calculateTotalPrice(updatedProducts)); // Update the totalPrice
       return updatedProducts;
     });
   };
 
+  // Function to calculate the total price of the selected products
   const calculateTotalPrice = (products = productsSelected) => {
-    // Calcula o totalPrice como a soma dos preços totais de todos os produtos na lista
+    // Calculate the totalPrice as the sum of the total prices of all products in the list
     return products.reduce((total, product) => {
       return total + product.price * product.quantity;
     }, 0);
   };
 
+  // Render the component
   return (
     <>
       <ProductList>
         {productsSelected.map((product, index) => (
-          <ProductItem key={product.id}>
+          <ProductItem key={index}>
             <CloseIconProductList onClick={() => removeProduct(index)} />
             <ProductImage src={product.photo} />
             <ProductName>{product.name}</ProductName>
             <QuantityControls>
-              <QuantityButton onClick={() => updateQuantity(index, -1)}>
-                -
-              </QuantityButton>
-              <Quantity>{product.quantity}</Quantity>
-              <QuantityButton onClick={() => updateQuantity(index, 1)}>
-                +
-              </QuantityButton>
+              <QuantityControls>
+                <QuantityButton onClick={() => updateQuantity(index, -1)}>
+                  -
+                </QuantityButton>
+                <Quantity>{product.quantity}</Quantity>
+                <QuantityButton onClick={() => updateQuantity(index, 1)}>
+                  +
+                </QuantityButton>
+              </QuantityControls>
             </QuantityControls>
             <ProductPrice>R${product.price * product.quantity}</ProductPrice>
           </ProductItem>
@@ -69,7 +99,7 @@ export default function ListCart({ productsSelected, setProductsSelected }) {
         <p>R${totalPrice}</p>
       </TotalPrice>
       <OrderFinalized>
-        <h1>Finalizar Compra</h1>
+        <h1>Finalizar compra</h1>
       </OrderFinalized>
     </>
   );
