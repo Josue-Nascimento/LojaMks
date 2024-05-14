@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import CardButton from "./cardButton";
+import CartButton from "./cartButton";
 
 export default function HeaderTop({ productsSelected, setProductsSelected }) {
   return (
@@ -8,7 +8,7 @@ export default function HeaderTop({ productsSelected, setProductsSelected }) {
         <h1>
           MKS <span>Sistemas</span>
         </h1>
-        <CardButton
+        <CartButton
           setProductsSelected={setProductsSelected}
           productsSelected={productsSelected}
         />

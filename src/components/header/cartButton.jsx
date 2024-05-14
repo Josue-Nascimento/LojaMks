@@ -3,7 +3,7 @@ import { FaCartPlus } from "react-icons/fa";
 import { useState } from "react";
 import Cart from "../cart/cart";
 
-export default function CardButton({ productsSelected, setProductsSelected }) {
+export default function CartButton({ productsSelected, setProductsSelected }) {
   const [cardValue, setCardValue] = useState(false);
 
   // Function to toggle the visibility of the cart
