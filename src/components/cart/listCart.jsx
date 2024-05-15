@@ -15,7 +15,7 @@ export default function ListCart({ productsSelected, setProductsSelected }) {
   const removeProduct = (index) => {
     // Display a confirmation message to the user
     const confirmation = window.confirm(
-      "Are you sure you want to remove this item?"
+      "Tem certeza que deseja remover esse item?"
     );
 
     // Check if the user confirmed the removal
@@ -45,7 +45,7 @@ export default function ListCart({ productsSelected, setProductsSelected }) {
             } else {
               // Display a confirmation message before removing the item
               const confirmation = window.confirm(
-                "Are you sure you want to remove this item?"
+                "Tem certeza que deseja remover esse item?"
               );
               if (confirmation) {
                 return null;
@@ -111,6 +111,10 @@ const ProductList = styled.div`
   align-items: center;
   padding-bottom: 70px;
   overflow-y: auto;
+
+  @media (max-width: 667px) {
+   width: 70%;
+  }
 `;
 
 const ProductItem = styled.div`
@@ -123,6 +127,10 @@ const ProductItem = styled.div`
   justify-content: space-around;
   align-items: center;
   margin-top: 20px;
+  @media (max-width: 667px) {
+    width: 100%;
+    
+  }
 `;
 
 const ProductImage = styled.img`
@@ -135,11 +143,15 @@ const ProductName = styled.h2`
   font-size: 13px;
   font-weight: 400;
   font-family: Montserrat;
+  color: black;
 `;
 
 const QuantityControls = styled.div`
   display: flex;
   align-items: center;
+
+  border-radius: 8px;
+  border: 1px solid #c5baba;
 `;
 
 const QuantityButton = styled.button`
@@ -149,13 +161,16 @@ const QuantityButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
-  color: #0f52ba;
+  font-size: 14px;
 `;
 
 const Quantity = styled.span`
+  width: 15px;
+  box-shadow: 0px 0px 0px 1px #c5baba;
   font-size: 10px;
-  margin: 0 5px;
+  margin: 0.5px;
+  color: black;
+  font-family: "Courier New";
 `;
 
 const ProductPrice = styled.p`
@@ -187,6 +202,15 @@ const TotalPrice = styled.div`
     font-weight: 700;
     color: white;
     padding: 5px 10px;
+    margin-top: 10px;
+  }
+
+  @media (max-width: 667px) {
+    width: 100%;
+    p {
+      font-size: 20px;
+      margin-top: 10px;
+    }
   }
 `;
 

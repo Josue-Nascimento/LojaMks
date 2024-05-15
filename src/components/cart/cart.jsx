@@ -16,7 +16,7 @@ export default function Cart({
   const handleClickInside = (e) => {
     e.stopPropagation(); //// Prevents clicks inside the cart from affecting elements outside
   };
-  
+
   return (
     <CartContainer onClick={handleClickInside}>
       <CartTop>
@@ -27,14 +27,13 @@ export default function Cart({
         productsSelected={productsSelected}
         setProductsSelected={setProductsSelected}
       />
-     
     </CartContainer>
   );
 }
 
 const CartContainer = styled.div`
-  width: 481px;
-  height: 100vh;
+  width: 31.5%;
+  height: 100%;
   position: relative;
   background-color: #0f52ba;
 
@@ -45,6 +44,11 @@ const CartContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media (max-width: 667px) {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const CartTop = styled.div`
@@ -52,18 +56,24 @@ const CartTop = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  h1 { 
+  h1 {
     font-size: 30px;
     color: #f8f8f8;
-    margin-right: 1px;
+  }
+  @media (max-width: 667px) {
+    width: 100%;
+    h1 {
+      font-size: 30px;
+    }
   }
 `;
 
 const CloseIcon = styled(IoMdCloseCircle)`
   width: 38px;
   height: 38px;
-  margin-left: auto;
+  color: black;
   cursor: pointer;
+  @media (max-width: 667px) {
+    width: 30px;
+  }
 `;
-
-

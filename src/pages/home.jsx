@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import HeaderTop from "../components/header/headerTop";
-import SectionProducts from "../components/sectionProducts";
+import SectionProducts from "../components/sectionProduct/sectionProducts";
 import { useState } from "react";
 
 export default function Home() {
@@ -17,9 +17,11 @@ export default function Home() {
 }
 
 const Container = styled.div`
+width: 100%;
 display: flex;
 flex-direction: column;
 align-items: center;
+min-height: 100vh; /* Alterado para min-height para garantir que o contêiner tenha pelo menos a altura da tela */
 `;
 
 const Footer = styled.footer`

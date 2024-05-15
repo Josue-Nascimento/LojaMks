@@ -23,7 +23,7 @@ const Header = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 101px;
+  height: 100px;
   left: 65px;
   gap: 0px;
   opacity: 0px;
@@ -35,6 +35,11 @@ const Header = styled.div`
     font-size: 40px;
     margin-left: 50px;
     font-weight: bold;
+    @media (max-width: 667px) {
+      font-size: 30px;
+      margin-left: 50px;
+      font-weight: bold;
+    }
   }
 
   span {

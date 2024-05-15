@@ -21,14 +21,15 @@ export default function CartButton({ productsSelected, setProductsSelected }) {
             setCardValue={setCardValue} 
           />
         )}
-        <FaCartPlus />
+        <FaCartPlusIcon />
         <p>{productsSelected.length}</p>
       </CartButtonWrapper>
     </div>
   );
 }
 
-const CartButtonWrapper = styled.button`
+const CartButtonWrapper = styled.div`
+background-color: white;
   width: 90px;
   height: 45px;
   border: none;
@@ -36,12 +37,22 @@ const CartButtonWrapper = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   border-radius: 10px;
   cursor: pointer;
+  width: 65px;
+  height: 35px;
+ ;
+
   p {
     width: 20px;
     font-size: 10px;
     font-weight: bolder;
+    color: black;
   }
+`;
+const FaCartPlusIcon = styled(FaCartPlus)`
+font-size: 15px;
+ color: black;
 `;
 
