@@ -28,7 +28,7 @@ const Header = styled.div`
   gap: 0px;
   opacity: 0px;
   top: 28px;
-  font-family: Montserrat;
+ 
   color: white;
 
   h1 {

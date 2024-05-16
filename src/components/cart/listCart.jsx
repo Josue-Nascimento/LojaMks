@@ -80,22 +80,21 @@ export default function ListCart({ productsSelected, setProductsSelected }) {
             <ProductImage src={product.photo} />
             <ProductName>{product.name}</ProductName>
             <QuantityControls>
-              <QuantityControls>
-                <QuantityButton onClick={() => updateQuantity(index, -1)}>
-                  -
-                </QuantityButton>
-                <Quantity>{product.quantity}</Quantity>
-                <QuantityButton onClick={() => updateQuantity(index, 1)}>
-                  +
-                </QuantityButton>
-              </QuantityControls>
+              <QuantityButton onClick={() => updateQuantity(index, -1)}>
+                -
+              </QuantityButton>
+              <Quantity>{product.quantity}</Quantity>
+              <QuantityButton onClick={() => updateQuantity(index, 1)}>
+                +
+              </QuantityButton>
             </QuantityControls>
+
             <ProductPrice>R${product.price * product.quantity}</ProductPrice>
           </ProductItem>
         ))}
       </ProductList>
-      <TotalPrice>
-        <p>Total: </p>
+      <TotalPrice> 
+        <p>Total:</p>
         <p>R${totalPrice}</p>
       </TotalPrice>
       <OrderFinalized>
@@ -113,7 +112,7 @@ const ProductList = styled.div`
   overflow-y: auto;
 
   @media (max-width: 667px) {
-   width: 70%;
+    width: 70%;
   }
 `;
 
@@ -129,7 +128,6 @@ const ProductItem = styled.div`
   margin-top: 20px;
   @media (max-width: 667px) {
     width: 100%;
-    
   }
 `;
 
@@ -170,12 +168,15 @@ const Quantity = styled.span`
   font-size: 10px;
   margin: 0.5px;
   color: black;
-  font-family: "Courier New";
+  font-family: 'Courier New', Courier, monospace;
+ 
 `;
 
 const ProductPrice = styled.p`
   font-family: Montserrat;
   margin-right: 25px;
+  color: black;
+  font-weight: 600;
 `;
 
 const CloseIconProductList = styled(IoMdCloseCircle)`
@@ -194,15 +195,15 @@ const TotalPrice = styled.div`
   justify-content: center;
   align-items: center;
 
-  p {
-    width: 100%;
-    margin-bottom: 90px;
-    font-size: 28px;
-    line-height: 15px;
-    font-weight: 700;
-    color: white;
-    padding: 5px 10px;
-    margin-top: 10px;
+  p  {
+    width: 100% !important;
+    margin-bottom: 90px !important;
+    font-size: 28px !important;
+    line-height: 15px !important;
+    font-weight: 700 !important;
+    color: white !important;
+    padding: 5px 10px !important;
+    margin-top: 10px !important;
   }
 
   @media (max-width: 667px) {

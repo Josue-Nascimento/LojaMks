@@ -3,14 +3,17 @@ import HeaderTop from "../components/header/headerTop";
 import SectionProducts from "../components/sectionProduct/sectionProducts";
 import { useState } from "react";
 
+
 export default function Home() {
   const [productsSelected, setProductsSelected]= useState([])
-  console.log(productsSelected)
+
+
   
   return (
     <Container>
       <HeaderTop productsSelected={productsSelected} setProductsSelected={setProductsSelected} />
-      <SectionProducts productsSelected={productsSelected} setProductsSelected={setProductsSelected}/>
+      <SectionProducts  productsSelected={productsSelected} setProductsSelected={setProductsSelected}/>
+    
       <Footer><p>MKS sistemas © Todos os direitos reservados</p></Footer>
     </Container>
   );

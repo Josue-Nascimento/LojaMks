@@ -22,7 +22,7 @@ export default function CartButton({ productsSelected, setProductsSelected }) {
           />
         )}
         <FaCartPlusIcon />
-        <p>{productsSelected.length}</p>
+        <p className="productLength">{productsSelected.length}</p>
       </CartButtonWrapper>
     </div>
   );
@@ -44,7 +44,7 @@ background-color: white;
   height: 35px;
  ;
 
-  p {
+  .productLength {
     width: 20px;
     font-size: 10px;
     font-weight: bolder;

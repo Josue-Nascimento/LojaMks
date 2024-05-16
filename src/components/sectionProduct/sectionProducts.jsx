@@ -11,6 +11,7 @@ import SectionList from "./sectionList";
 export default function SectionProducts({
   setProductsSelected,
   productsSelected,
+  
 }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -21,13 +22,13 @@ export default function SectionProducts({
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://mks-frontend-challenge-04811e8151e6.herokuapp.com/api/v1/products?page=1&rows=8&sortBy=id&orderBy=DESC"
+          `https://mks-frontend-challenge-04811e8151e6.herokuapp.com/api/v1/products?page=1&rows=8&sortBy=id&orderBy=DESC`
         );
         setProductsList(response.data.products);
-        setLoading(false);
+       // setLoading(false);
       } catch (error) {
         setError(error);
-        setLoading(false);
+       // setLoading(false);
       }
     };
 
@@ -40,7 +41,7 @@ export default function SectionProducts({
         <SkeletonContainer>
           {Array.from({ length: 8 }).map((_, index) => (
             <SkeletonProduct key={index}>
-              <Skeleton height={138} />
+              <Skeleton height={10} />
               <Price>
                 <h2>
                   <Skeleton height={38} />
@@ -72,7 +73,8 @@ const Container = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   width: 70%;
-  padding: 30px;
+ margin-top: 30px;
+ margin-bottom: 30px;
 
   @media (max-width: 667px) {
     display: flex;
@@ -84,17 +86,21 @@ const Container = styled.div`
 
 const Price = styled.div`
   display: flex;
-
   flex-direction: column;
 
   h2 {
-    font-family: Montserrat;
     font-size: 16px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 10px;
+
+    @media (max-width: 667px) {
+      font-size: 10px;
+    }
+
   }
+
 
   span {
     background-color: #373737;
@@ -105,7 +111,7 @@ const Price = styled.div`
     height: 26px;
     color: white;
     font-size: 10px;
-    font-family: Montserrat;
+   
     font-weight: 700;
     border-radius: 5px;
     margin-left: 5px;
@@ -122,15 +128,11 @@ const ErrorMessage = styled.div`
 const SkeletonContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   width: 100%;
-  max-width: 1000px; /* Adicionado para limitar a largura do contêiner */
-  margin: 30px auto;
-  padding: 30px;
 `;
 const SkeletonProduct = styled.div`
-  width: 200px;
-  height: 285px;
+  width: 20px;
+  height: 200px;
   border-radius: 5px;
   box-shadow: 1px 1px 1px 5px #f2f2f2;
   margin: 10px;

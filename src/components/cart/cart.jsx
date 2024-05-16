@@ -23,16 +23,17 @@ export default function Cart({
         <h1>Carrinho de compras</h1>
         <CloseIcon onClick={() => handleClose()} />
       </CartTop>
-      <ListCart
+      {productsSelected.length > 0 ?  <ListCart
         productsSelected={productsSelected}
         setProductsSelected={setProductsSelected}
-      />
+      /> : "Adicione itens no seu carrinho!"}
+     
     </CartContainer>
   );
 }
 
 const CartContainer = styled.div`
-  width: 31.5%;
+  width: 31.5%; 
   height: 100%;
   position: relative;
   background-color: #0f52ba;
@@ -57,8 +58,8 @@ const CartTop = styled.div`
   justify-content: space-around;
   align-items: center;
   h1 {
-    font-size: 30px;
-    color: #f8f8f8;
+    font-size: 30px !important;
+    color: #f8f8f8 !important;
   }
   @media (max-width: 667px) {
     width: 100%;
