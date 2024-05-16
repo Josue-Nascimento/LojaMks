@@ -210,7 +210,8 @@ const TotalPrice = styled.div`
     font-weight: 700 !important;
     color: white !important;
     padding: 5px 10px !important;
-    margin-top: 10px !important;
+    margin-top: 15px !important;
+
     @media (max-width: 667px) {
     width: 100%;
     font-size: 23px !important;
@@ -242,9 +243,10 @@ const OrderFinalized = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+
     @media (max-width: 667px) {
     font-size: 25px;
-    margin-left: 100px;
+    margin-left: 100px !important; 
   }
   }
 `;
