@@ -25,10 +25,10 @@ export default function SectionProducts({
           `https://mks-frontend-challenge-04811e8151e6.herokuapp.com/api/v1/products?page=1&rows=8&sortBy=id&orderBy=DESC`
         );
         setProductsList(response.data.products);
-       // setLoading(false);
+        setLoading(false);
       } catch (error) {
         setError(error);
-       // setLoading(false);
+        setLoading(false);
       }
     };
 
@@ -39,18 +39,19 @@ export default function SectionProducts({
     <Container>
       {loading ? (
         <SkeletonContainer>
-          {Array.from({ length: 8 }).map((_, index) => (
+          {Array.from({ length: 8}).map((_, index) => (
             <SkeletonProduct key={index}>
-              <Skeleton height={10} />
-              <Price>
+              <img src={<Skeleton  />} />
+              
+              <SkeletonPrice>
                 <h2>
-                  <Skeleton height={38} />
+                  <Skeleton  />
                 </h2>
                 <span>
-                  <Skeleton width={64} />
+                  <Skeleton />
                 </span>
-              </Price>
-              <Skeleton count={2} width={30} />
+              </SkeletonPrice>
+              <Skeleton  />
             </SkeletonProduct>
           ))}
         </SkeletonContainer>
@@ -128,30 +129,67 @@ const ErrorMessage = styled.div`
 const SkeletonContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   width: 100%;
-`;
-const SkeletonProduct = styled.div`
-  width: 20px;
-  height: 200px;
-  border-radius: 5px;
-  box-shadow: 1px 1px 1px 5px #f2f2f2;
-  margin: 10px;
-  flex: 0 0 calc(33.333% - 20px); /* Define a largura do item para exibir em uma grade de 3 colunas */
-  max-width: calc(
-    33.333% - 20px
-  ); /* Define a largura máxima para evitar que os esqueletos se sobreponham */
+ margin-top: 30px;
+ margin-bottom: 30px;
 
-  img,
-  h2,
-  span,
-  p,
-  img {
-    width: 111px;
+
+ img {
+  width: 111px;
     height: 138px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    background-color: #ece3e3;
+
+    @media (max-width: 667px) {
+      width: 60px;
+      height: 80px;
+      margin-right: 30px;
+    }
+  }
+  
+`;
+const SkeletonPrice = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  h2{
+    width: 100px;
+    background-color: #ece3e3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  p{
+    background-color: #ece3e3;
   }
 
-  p {
-    width: 192px;
-    height: 50px; /* Ajuste a altura do parágrafo conforme necessário */
+    span{
+      background-color: #ece3e3;
+    }
+  
+`
+const SkeletonProduct = styled.div`
+ width: 217.56px;
+  height: 285px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px 5px #ecebeb;
+  margin: 10px;
+
+  @media (max-width: 667px) {
+    width: 40%;
+    height: 25%;
+    margin: 5px;
+    margin-bottom: 10px;
+    margin-right: 10px;
   }
+
+ 
+
 `;

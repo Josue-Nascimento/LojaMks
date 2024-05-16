@@ -61,10 +61,8 @@ const ContainerProducts = styled.div`
 
   @media (max-width: 667px) {
     width: 40%;
-    height: 80%;
+   height: 220px;
     margin: 5px;
-
- 
   }
   img {
     width: 111px;
@@ -75,8 +73,9 @@ const ContainerProducts = styled.div`
     justify-content: center;
 
     @media (max-width: 667px) {
-      width: 60px;
+      width: 80px;
       height: 100px;
+      margin-top: 10px;
     }
 
 
@@ -88,9 +87,8 @@ const ContainerProducts = styled.div`
     height: 25px;
 
     @media (max-width: 667px) {
-    
       font-size: 7px;
-      width: 140px;
+      margin-bottom: 5px;
       height: 25px;
     }
   }
