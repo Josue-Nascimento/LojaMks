@@ -112,7 +112,8 @@ const ProductList = styled.div`
   overflow-y: auto;
 
   @media (max-width: 667px) {
-    width: 70%;
+    width: 80%;
+    margin-left: 40px;
   }
 `;
 
@@ -134,6 +135,9 @@ const ProductItem = styled.div`
 const ProductImage = styled.img`
   width: 46px;
   height: 57px;
+  @media (max-width: 667px) {
+  margin-left: 10px;
+}
 `;
 
 const ProductName = styled.h2`
@@ -177,6 +181,9 @@ const ProductPrice = styled.p`
   margin-right: 25px;
   color: black;
   font-weight: 600;
+  @media (max-width: 667px) {
+  margin-left: 20px;
+}
 `;
 
 const CloseIconProductList = styled(IoMdCloseCircle)`
@@ -194,7 +201,7 @@ const TotalPrice = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
+ 
   p  {
     width: 100% !important;
     margin-bottom: 90px !important;
@@ -204,15 +211,15 @@ const TotalPrice = styled.div`
     color: white !important;
     padding: 5px 10px !important;
     margin-top: 10px !important;
+    @media (max-width: 667px) {
+    width: 100%;
+    font-size: 23px !important;
+    margin-left: 35px;
+  
+}
   }
 
-  @media (max-width: 667px) {
-    width: 100%;
-    p {
-      font-size: 20px;
-      margin-top: 10px;
-    }
-  }
+
 `;
 
 const OrderFinalized = styled.div`
@@ -225,6 +232,8 @@ const OrderFinalized = styled.div`
   flex-direction: column;
   bottom: 39px;
 
+ 
+
   h1 {
     background-color: black;
     width: 100%;
@@ -233,5 +242,9 @@ const OrderFinalized = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    @media (max-width: 667px) {
+    font-size: 25px;
+    margin-left: 100px;
+  }
   }
 `;

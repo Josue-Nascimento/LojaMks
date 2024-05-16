@@ -60,13 +60,12 @@ const CartTop = styled.div`
   h1 {
     font-size: 30px !important;
     color: #f8f8f8 !important;
+    @media (max-width: 667px) {
+  font-size: 23px !important;
+}
   }
-  @media (max-width: 667px) {
-    width: 100%;
-    h1 {
-      font-size: 30px;
-    }
-  }
+ 
+  
 `;
 
 const CloseIcon = styled(IoMdCloseCircle)`

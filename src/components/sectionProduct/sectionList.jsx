@@ -75,7 +75,7 @@ const ContainerProducts = styled.div`
     @media (max-width: 667px) {
       width: 80px;
       height: 100px;
-      margin-top: 10px;
+      margin-top: 5px;
     }
 
 
@@ -87,9 +87,11 @@ const ContainerProducts = styled.div`
     height: 25px;
 
     @media (max-width: 667px) {
+    
+      width: 90%;
+     margin-left: 10px;
       font-size: 7px;
-      margin-bottom: 5px;
-      height: 25px;
+      margin-bottom: 10px;
     }
   }
 `;

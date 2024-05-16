@@ -98,6 +98,8 @@ const Price = styled.div`
 
     @media (max-width: 667px) {
       font-size: 10px;
+      width: 70%;
+      margin-left: 10px;
     }
 
   }
@@ -116,6 +118,13 @@ const Price = styled.div`
     font-weight: 700;
     border-radius: 5px;
     margin-left: 5px;
+
+    @media (max-width: 667px) {
+      width: 64px;
+    height: 16px;
+    display: flex;
+    margin-left: 42px;
+    }
   }
 `;
 
