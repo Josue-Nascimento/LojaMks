@@ -1,29 +1,38 @@
 import styled from "styled-components";
 import { BsBagPlusFill } from "react-icons/bs";
 
+
 export default function SectionList({
   productsList,
   setProductsSelected,
   productsSelected,
   Price,
+  finalized
 }) {
+ 
   // Function to add a product to the cart.
   const sendToCart = (photo, price, name) => {
-    const newProduct = {
+    let newProduct = {
       photo: photo,
       price: price,
       name: name,
       quantity: 1,
     };
+    if(finalized === true){
+      alert("Não pode adicionar mais produtos")
+      newProduct= {}
+        }
     const exists = productsSelected.some((product) => product.name === name);
     if (!exists) {
       ("Enviando dados:", newProduct);
       setProductsSelected((prevProducts) => [...prevProducts, newProduct]);
     } else {
-      window.confirm(
+      alert(
         "Esse item já foi adicionado no carrinho!"
       );
     }
+    
+    
   };
   return (
     <>
@@ -91,7 +100,7 @@ const ContainerProducts = styled.div`
       width: 90%;
      margin-left: 10px;
       font-size: 7px;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
     }
   }
 `;

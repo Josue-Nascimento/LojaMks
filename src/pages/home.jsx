@@ -6,13 +6,14 @@ import { useState } from "react";
 
 export default function Home() {
   const [productsSelected, setProductsSelected]= useState([])
+  const [finalized, setFinalized] = useState(false)
 
 
   
   return (
     <Container>
-      <HeaderTop productsSelected={productsSelected} setProductsSelected={setProductsSelected} />
-      <SectionProducts  productsSelected={productsSelected} setProductsSelected={setProductsSelected}/>
+      <HeaderTop setFinalized={setFinalized} finalized={finalized} productsSelected={productsSelected} setProductsSelected={setProductsSelected} />
+        <SectionProducts finalized={finalized}  productsSelected={productsSelected} setProductsSelected={setProductsSelected}/>
     
       <Footer><p>MKS sistemas © Todos os direitos reservados</p></Footer>
     </Container>

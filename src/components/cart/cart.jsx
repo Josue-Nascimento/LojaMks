@@ -1,15 +1,19 @@
 import styled from "styled-components";
 import { IoMdCloseCircle } from "react-icons/io";
 import ListCart from "../cart/listCart";
+import { useState } from "react";
 
 export default function Cart({
   productsSelected,
   setCardValue,
-  setProductsSelected,
+  setProductsSelected,  setFinalized, finalized
 }) {
   // Function to handle closing the cart
   const handleClose = () => {
     setCardValue(false); // Fecha a aba
+    if(finalized === true){
+      window.location.reload();
+    }
   };
 
   // Function to prevent click events inside the cart from affecting elements outside of it
@@ -26,7 +30,8 @@ export default function Cart({
       {productsSelected.length > 0 ?  <ListCart
         productsSelected={productsSelected}
         setProductsSelected={setProductsSelected}
-      /> : "Adicione itens no seu carrinho!"}
+        finalized={finalized} setFinalized={setFinalized}
+      /> : <p className="notice">Adicione itens no seu carrinho!</p>}
      
     </CartContainer>
   );
@@ -37,7 +42,6 @@ const CartContainer = styled.div`
   height: 100%;
   position: relative;
   background-color: #0f52ba;
-
   position: fixed;
   right: 0;
   top: 0;
@@ -49,6 +53,15 @@ const CartContainer = styled.div`
   @media (max-width: 667px) {
     width: 100%;
     height: 100%;
+  }
+  .notice{
+    font-size: 30px ;
+    font-weight: bold;
+    position: fixed;
+    top: 50%;
+    @media (max-width: 667px) {
+    left: 0%;
+  }
   }
 `;
 

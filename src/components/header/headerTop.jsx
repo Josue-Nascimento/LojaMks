@@ -1,14 +1,14 @@
 import styled from "styled-components";
 import CartButton from "./cartButton";
 
-export default function HeaderTop({ productsSelected, setProductsSelected }) {
+export default function HeaderTop({ productsSelected, setProductsSelected, setFinalized, finalized }) {
   return (
     <>
       <Header>
         <h1>
           MKS <span>Sistemas</span>
         </h1>
-        <CartButton
+        <CartButton  setFinalized={setFinalized} finalized={finalized}
           setProductsSelected={setProductsSelected}
           productsSelected={productsSelected}
         />

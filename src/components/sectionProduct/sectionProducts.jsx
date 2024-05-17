@@ -11,6 +11,7 @@ import SectionList from "./sectionList";
 export default function SectionProducts({
   setProductsSelected,
   productsSelected,
+  finalized
   
 }) {
   const [loading, setLoading] = useState(true);
@@ -59,6 +60,7 @@ export default function SectionProducts({
         <ErrorMessage>Ocorreu um erro ao carregar os produtos.</ErrorMessage>
       ) : (
         <SectionList
+        finalized={finalized} 
           Price={Price}
           productsSelected={productsSelected}
           setProductsSelected={setProductsSelected}

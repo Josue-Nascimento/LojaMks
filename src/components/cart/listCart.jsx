@@ -1,11 +1,15 @@
 import styled from "styled-components";
 import { IoMdCloseCircle } from "react-icons/io";
 import { useEffect, useState } from "react";
+import Finalized from "../finalized/finalized";
 
-export default function ListCart({ productsSelected, setProductsSelected }) {
+export default function ListCart({ productsSelected, setProductsSelected, finalized, setFinalized }) {
   // State to store the total price
   const [totalPrice, setTotalPrice] = useState(0);
-
+  
+  const handleToggleCart = () => {
+    setFinalized(true); // Toggles between opening and closing the cart
+  };
   // Effect to update the total price when the selected products change
   useEffect(() => {
     setTotalPrice(calculateTotalPrice());
@@ -73,33 +77,37 @@ export default function ListCart({ productsSelected, setProductsSelected }) {
   // Render the component
   return (
     <>
-      <ProductList>
-        {productsSelected.map((product, index) => (
-          <ProductItem key={index}>
-            <CloseIconProductList onClick={() => removeProduct(index)} />
-            <ProductImage src={product.photo} />
-            <ProductName>{product.name}</ProductName>
-            <QuantityControls>
-              <QuantityButton onClick={() => updateQuantity(index, -1)}>
-                -
-              </QuantityButton>
-              <Quantity>{product.quantity}</Quantity>
-              <QuantityButton onClick={() => updateQuantity(index, 1)}>
-                +
-              </QuantityButton>
-            </QuantityControls>
-
-            <ProductPrice>R${product.price * product.quantity}</ProductPrice>
-          </ProductItem>
-        ))}
-      </ProductList>
-      <TotalPrice> 
-        <p>Total:</p>
-        <p>R${totalPrice}</p>
-      </TotalPrice>
-      <OrderFinalized>
-        <h1>Finalizar compra</h1>
-      </OrderFinalized>
+     {finalized ? 
+          <Finalized totalPrice={totalPrice} productsSelected={productsSelected}/> : <>   <ProductList>
+          {productsSelected.map((product, index) => (
+            <ProductItem key={index}>
+              <CloseIconProductList onClick={() => removeProduct(index)} />
+              <ProductImage src={product.photo} />
+              <ProductName>{product.name}</ProductName>
+              <QuantityControls>
+                <QuantityButton onClick={() => updateQuantity(index, -1)}>
+                  -
+                </QuantityButton>
+                <Quantity>{product.quantity}</Quantity>
+                <QuantityButton onClick={() => updateQuantity(index, 1)}>
+                  +
+                </QuantityButton>
+              </QuantityControls>
+  
+              <ProductPrice>R${product.price * product.quantity}</ProductPrice>
+            </ProductItem>
+          ))}
+        </ProductList>
+        <TotalPrice>
+          <p>Total:</p>
+          <p>R${totalPrice}</p>
+        </TotalPrice>
+        <OrderFinalized onClick={handleToggleCart}>
+         <h1>Finalizar compra</h1>   
+        </OrderFinalized>
+        </>
+        }
+    
     </>
   );
 }
@@ -136,8 +144,8 @@ const ProductImage = styled.img`
   width: 46px;
   height: 57px;
   @media (max-width: 667px) {
-  margin-left: 10px;
-}
+    margin-left: 10px;
+  }
 `;
 
 const ProductName = styled.h2`
@@ -167,13 +175,12 @@ const QuantityButton = styled.button`
 `;
 
 const Quantity = styled.span`
-  width: 15px;
+  width: 25px;
   box-shadow: 0px 0px 0px 1px #c5baba;
   font-size: 10px;
   margin: 0.5px;
   color: black;
-  font-family: 'Courier New', Courier, monospace;
- 
+  font-family: "Courier New", Courier, monospace;
 `;
 
 const ProductPrice = styled.p`
@@ -182,8 +189,8 @@ const ProductPrice = styled.p`
   color: black;
   font-weight: 600;
   @media (max-width: 667px) {
-  margin-left: 20px;
-}
+    margin-left: 20px;
+  }
 `;
 
 const CloseIconProductList = styled(IoMdCloseCircle)`
@@ -193,7 +200,7 @@ const CloseIconProductList = styled(IoMdCloseCircle)`
   top: 0;
   right: 0;
   cursor: pointer;
-  color: #000; /* Altere a cor conforme necessário */
+  color: #000000; /* Altere a cor conforme necessário */
 `;
 
 const TotalPrice = styled.div`
@@ -201,8 +208,8 @@ const TotalPrice = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
- 
-  p  {
+
+  p {
     width: 100% !important;
     margin-bottom: 90px !important;
     font-size: 28px !important;
@@ -213,14 +220,11 @@ const TotalPrice = styled.div`
     margin-top: 15px !important;
 
     @media (max-width: 667px) {
-    width: 100%;
-    font-size: 23px !important;
-    margin-left: 35px;
-  
-}
+      width: 100%;
+      font-size: 23px !important;
+      margin-left: 35px;
+    }
   }
-
-
 `;
 
 const OrderFinalized = styled.div`
@@ -233,8 +237,6 @@ const OrderFinalized = styled.div`
   flex-direction: column;
   bottom: 39px;
 
- 
-
   h1 {
     background-color: black;
     width: 100%;
@@ -245,8 +247,8 @@ const OrderFinalized = styled.div`
     justify-content: center;
 
     @media (max-width: 667px) {
-    font-size: 25px;
-    margin-left: 100px !important; 
-  }
+      font-size: 25px;
+      margin-left: 100px !important;
+    }
   }
 `;
