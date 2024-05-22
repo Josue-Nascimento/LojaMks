@@ -20,7 +20,7 @@ export default function SectionList({
     };
     if(finalized === true){
       alert("Não pode adicionar mais produtos")
-      newProduct= {}
+      
         }
     const exists = productsSelected.some((product) => product.name === name);
     if (!exists) {
@@ -47,7 +47,14 @@ export default function SectionList({
 
             <p className="description">{item.description}</p>
           </Price>
-          <BuyDiv onClick={() => sendToCart(item.photo, item.price, item.name)}>
+          <BuyDiv onClick={() => {
+              if (!finalized) {
+                sendToCart(item.photo, item.price, item.name);
+              } else {
+                alert("Não pode adicionar mais produtos");
+              }
+            }}>
+
             <BsBagPlusFillIcon />
             Comprar
           </BuyDiv>
